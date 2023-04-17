@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "python_contest_template"
 version = "0.0.1"
 authors = [
-  { name="Grapymage", email="zhangty21@mails.jlu.edu.cn" },
+  { name="zhangtingyu11", email="zhangty21@mails.jlu.edu.cn" },
 ]
 description = "python template for contest"
 readme = "README.md"
