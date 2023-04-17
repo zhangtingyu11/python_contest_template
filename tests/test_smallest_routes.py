@@ -64,7 +64,7 @@ class Test_TestHeapDijkstra(unittest.TestCase):
             g[x].append([y, w])
         return g
     
-    def test_common_dijkstra0(self):
+    def test_heap_dijkstra0(self):
         edges = [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]
         n = 4
         start = 0
