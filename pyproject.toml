@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python_contest_template"
-version = "0.0.1"
+version = "0.0.4"
 authors = [
   { name="zhangtingyu11", email="zhangty21@mails.jlu.edu.cn" },
 ]
