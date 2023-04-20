@@ -1,5 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -16,6 +17,10 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
 [project.urls]
 "Homepage" = "https://github.com/zhangtingyu11/python_contest_template"
