@@ -79,70 +79,41 @@ def calculate_changed_nums(nums: List[int], changes:List[List[int]])->List[int]:
 
 
 """
-! 二维差分数组
+#! 二维差分数组
 现在是对[row1, col1]到[row2, col2]的矩形范围内的数组都+k
 从二维前缀和的角度来看对区域左上角+k 会对所有右下位置产生影响，那么在区域右上角的右边相邻处和左下角的下边相邻处
 -k可以消除这个影响,s 但是两个-k又会对区域右下角的右下所有位置产生影响, 所以要在右下角的右下相邻处再+k还原回来。
-"""
-def calculate_diff_dim2(grid: List[List[int]])->List[List[int]]:
-    """计算二维差分数组
-        diff[i][j] = grid[i][j] - grid[i-1][j] - grid[i][j-1] + grid[i-1][j-1]
 
-    Args:
-        grid (List[List[int]]): 输入的m*n数据
-
-    Returns:
-        List[List[int]]: 生成的m*n的二维差分数组
-    """
-    m, n = len(grid), len(grid[0])
-    diff = [[0] * n for _ in range(m)]
-    for i in range(m):
-        for j in range(n):
-            if(i==0 and j==0):
-                diff[i][j] = grid[i][j]
-            elif(i>0 and j==0):
-                diff[i][j] = grid[i][j]-grid[i-1][j]
-            elif(i==0 and j>0):
-                diff[i][j] = grid[i][j]-grid[i][j-1]
-            else:
-                diff[i][j] = grid[i][j] - grid[i-1][j] - grid[i][j-1] + grid[i-1][j-1]
-    return diff
-                
+#! 假设矩形的大小是m*n的, 一般我们将差分数组设置成(m+2)*(n+2)的, 去掉边缘宽度为1的m*n的矩形就是差分数据
+#! 这么做是为了方便后面求二维前缀和
+"""             
 
 def calculate_changed_nums_dim2(grid: List[List[int]], changes:List[List[int]])->List[List[int]]:
     """给定原始grid, 和对应的区间变化changes, 求变化后的矩阵
-    二维前缀和为pre_sum[i][j] = pre_sum[i-1][j]+pre_sum[i][j-1]-pre_sum[i-1][j-1]+diff[i][j]
 
     Args:
         grid (List[List[int]]): 原始的m*n的grid
-        changes (List[List[int]]): 长度为m, 即变化m次, 每个变化为[r1, c1, r2, c2, k], 即左上角为[r1, c1], 右下角为[r2, c2]的矩形范围内的数都增加k
+        changes (List[List[int]]): 长度为N, 即变化N次, 每个变化为[r1, c1, r2, c2, k], 
+                                   即左上角为[r1, c1], 右下角为[r2, c2]的矩形范围内的数都增加k
 
     Returns:
         List[List[int]]: 变化后的m*n的grid
     """
     m, n = len(grid), len(grid[0])
-    diff = calculate_diff_dim2(grid)
-    for row in diff:
-        row.append(0)
-    diff.append([0] * (n+1))
+    #* 更新差分数组
+    diff = [[0] * (n+2) for _ in range(m+2)]
     for r1, c1, r2, c2, k in changes:
-        diff[r1][c1]+=k
-        diff[r2+1][c1]-=k
-        diff[r1][c2+1]-=k
-        diff[r2+1][c2+1]+=k
+        diff[r1+1][c1+1]+=k
+        diff[r1+1][c2+2]-=k
+        diff[r2+2][c1+1]-=k
+        diff[r2+2][c2+2]+=k
     
-    ans = [[0] * n for _ in range(m)]
-    for i in range(m):
-        for j in range(n):
-            if(i == 0 and j == 0):
-                ans[i][j] = diff[i][j]
-            elif(i>0 and j==0):
-                ans[i][j] = ans[i-1][j]+diff[i][j]
-            elif(j>0 and i==0):
-                ans[i][j] = ans[i][j-1]+diff[i][j]
-            else:
-                ans[i][j] = ans[i-1][j]+ans[i][j-1]-ans[i-1][j-1]+diff[i][j]
-    return ans
+    #* 计算二维前缀和
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            diff[i][j] += diff[i-1][j]+diff[i][j-1]-diff[i-1][j-1]
+            grid[i-1][j-1]+=diff[i][j]
+    return grid
                 
 
         

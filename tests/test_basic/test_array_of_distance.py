@@ -18,16 +18,7 @@ def test_calculate_changed_nums():
                [0, 4, -1],
                [2, 2, 2]]
     assert(calculate_changed_nums(nums, changes)==[0, 6, 11, 6, 4])
-    
-    
-def test_calculate_diff_dim2():
-    grid = [[1, 2, 4, 3],
-            [5, 1, 2, 4],
-            [6, 3, 5, 9]]
-    ans = [[1, 1, 2, -1],
-           [4, -5, -1, 3],
-           [1, 1, 1, 2]]
-    assert(calculate_diff_dim2(grid)==ans)
+
     
 def test_calculate_changed_nums_dim2():
     grid = [[0, 0, 0],
