@@ -84,7 +84,7 @@ def calculate_max_cnt_dim2(field: List[List[int]])->int:
         diff[x1+1][y1+1]+=1
         diff[x1+1][y2+2]-=1
         diff[x2+2][y1+1]-=1
-        diff[x2+1][y2+2]+=1
+        diff[x2+2][y2+2]+=1
     
     ans = 0
     #* 用diff来存储前缀和
