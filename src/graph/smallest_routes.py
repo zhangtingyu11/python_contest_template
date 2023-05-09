@@ -55,7 +55,7 @@ def common_dijkstra(g: List[List[List[int]]], start: int) -> List[int]:
     dis = [inf] * n
     dis[start] = 0
     vis = [False]*n #* 标记已经被更新成最短路的点
-    for j in range(n):
+    for i in range(n):
         x = -1
         for j in range(n):
             if(not vis[j] and (x<0 or dis[j] < dis[x])):   #* 如果没有被标记过且当前的最短路, 那么就用x来更新其他点
