@@ -96,7 +96,6 @@ from math import *
 
 class SegmentTreeSingleModifyMax:
     """线段树单点更新, 区间求最大值
-    #TODO 并没有测试过
     """
     def __init__(self, n: int, nums: List[int]) -> None:
         """初始化线段树类
