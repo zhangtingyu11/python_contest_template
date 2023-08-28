@@ -39,6 +39,7 @@ def floyd(g: List[List[int]])->List[List[int]]:
 #! 优点: 可以不用计算两两点之间的最短路径, 可以求出某一起点开始的最短路径
 #! 缺点: 不能处理负权
 #! 时间复杂度: O(n^2), 如果求两两点之间的最短路, 也是O(n^3)
+#! Dijkstra算法可以保证在跑一次算法中每个点只遇到一次, 也就是说从起点到已经遍历到的点的路径在后续更新最短路的过程中, 其最短路不会变化
 """
 def common_dijkstra(g: List[List[List[int]]], start: int) -> List[int]:
     """dijkstra算法
@@ -106,5 +107,4 @@ def heap_dijkstra(g: List[List[List[int]]], start: int)->List[int]:
     
     
                 
-
 
