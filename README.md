@@ -30,6 +30,7 @@
 [找质因数](src/mathematic/find_prime_factor.py)
 [最大公因数](src/mathematic/greatest_common_divisor.py)
 [判断质数](src/mathematic/judge_prime.py)
+[筛选质数](src/mathematic/filter_prime.py)
 
 ## 杂项
 [离散化](src/misc/discretization.py)
