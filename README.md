@@ -22,6 +22,8 @@
 [最近公共祖先LCA](src/graph/lca.py)
 [最小生成树](src/graph/minimum_spanning_tree.py)
 [最短路径](src/graph/smallest_routes.py)
+[二叉树](src/graph/binary_tree.py)
+[二叉搜索树](src/graph/binary_search_tree.py)
 
 ## 数学
 [常用公式](src/mathematic/common_formula.py)
