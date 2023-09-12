@@ -1,6 +1,8 @@
 """
 拓扑排序
 拓扑排序的目标是将所有节点排序，使得排在前面的节点不能依赖于排在后面的节点。
+
+可以处理图中两两元素之间的依赖关系
 """
 from typing import List
 from collections import defaultdict, deque

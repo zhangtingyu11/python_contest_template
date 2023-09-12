@@ -64,3 +64,88 @@ class Solution:
                 path.pop()
         dfs(0)
         return ans
+    
+    
+"""
+! 组合型回溯
+可以带剪枝操作
+典型题型: https://leetcode.cn/problems/combinations/
+时间复杂度为K*C(n, k), 也就是组合数* 数的高度
+"""
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        path = []
+        ans = []
+        def dfs(i):
+            d = k - len(path)
+            if(len(path)==k):
+                ans.append(path.copy())
+                return 
+            #* 从后往前遍历
+            #* 剪枝, 如果剩下的元素和当前路径不足以构成长度为k的就退出
+            for j in range(i, d-1, -1):
+                path.append(j)
+                dfs(j-1)
+                path.pop()
+        dfs(n)
+        return ans
+    
+
+"""
+! 组合型回溯
+典型题型 https://leetcode.cn/problems/combination-sum-iii/
+"""
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        path = []
+        ans = []
+        def dfs(i, t):
+            #* t表示剩余数字的和
+            d = k - len(path)
+            #* 剪枝, 如果剩余数字再选d个都达不到t, 或者t<0就跳过
+            if(t < 0 or (i+i-d+1)*d//2 < t):
+                return 
+            if(len(path) == k and t == 0):
+                ans.append(path.copy())
+                return 
+            for j in range(i, d-1, -1):
+                path.append(j)
+                dfs(j-1, t-j)
+                path.pop()
+        dfs(9, n)
+        return ans
+    
+"""
+! 组合型回溯
+典型题型 https://leetcode.cn/problems/generate-parentheses/
+"""
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        #! 可以看成是2n个位置中选n个位置填左括号, 剩下的填右括号
+        #* 变成选或者不选的问题
+        #* 左括号只要没到n个就可以填
+        #* 右括号必须要当当前填了的左括号个数大于右括号才可以填
+        path = []
+        ans = []
+        m = 2*n
+        def dfs(i, open):
+            if(i == m):
+                ans.append(''.join(path))
+                return 
+            #* 可以填左括号
+            if(open < n):
+                path.append('(')
+                dfs(i+1, open+1)
+                path.pop()
+            #* 可以填右括号
+            if(i-open < open):
+                path.append(')')
+                dfs(i+1, open)
+                path.pop()
+        dfs(0, 0)
+        return ans
+            
+                
+        
+
+                    

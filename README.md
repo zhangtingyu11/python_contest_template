@@ -24,6 +24,7 @@
 [最短路径](src/graph/smallest_routes.py)
 [二叉树](src/graph/binary_tree.py)
 [二叉搜索树](src/graph/binary_search_tree.py)
+[拓扑排序](src/graph/topological_sorting.py)
 
 ## 数学
 [常用公式](src/mathematic/common_formula.py)
@@ -37,6 +38,9 @@
 ## 杂项
 [离散化](src/misc/discretization.py)
 [双指针](src/misc/double_pointer.py)
+
+## 搜索
+[回溯](src/search/backtrace.py)
 
 
 
