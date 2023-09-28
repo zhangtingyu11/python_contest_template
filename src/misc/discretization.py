@@ -27,29 +27,33 @@ def calculate_max_cnt_dim1(field: List[List[int]])->int:
         int: 点最多的位置的点的个数
     """
     #* 离散化
-    s = set()
-    for x, y in field:
-        s.add(x)
-        s.add(y)
-    s = sorted(s)
-    
-    #* 离散化后总共有n个数
-    n = len(s)
-    #* 创建差分数组
-    diff = [0] * (n+1)
-    for x, y in field:
-        l = bisect_left(s, x)
-        r = bisect_left(s, y)
-        diff[l]+=1
-        diff[r+1]-=1
-    
-    ans = 0
-    #* 用diff来存储前缀和
-    for i in range(1, n):
-        diff[i]+=diff[i-1]
-        if(diff[i] > ans):
-            ans = diff[i]
-    return ans
+    diff = Counter()
+    for start, end in field:
+        diff[start] += 1
+        diff[end + 1] -= 1
+    s = sorted(diff.keys())
+    pre = list(accumulate([diff[i] for i in s]))
+    #* 其中pre[i]表示在[s[i], s[i+1])这个区间内有多少个点
+    return max(pre)
+
+from itertools import accumulate
+def calculate_region_point_num_dim1(field: List[List[int]]):
+    """给定多个区间[li, ri], [li, ri]区间内的整数位置都有一个点, 求每个区间有多少个点
+
+    Args:
+        field (List[List[int]]): 长度为m, 每个元素是[l, r], 表示[l, r]区间内的整数点都有一个点
+
+    Returns:
+        int: 每个区间的点个数
+    """
+    diff = Counter()
+    for start, end in field:
+        diff[start] += 1
+        diff[end + 1] -= 1
+    s = sorted(diff.keys())
+    pre = list(accumulate([diff[i] for i in s]))
+    #* 其中pre[i]表示在[s[i], s[i+1])这个区间内有多少个点
+    return pre
 
 
 def calculate_max_cnt_dim2(field: List[List[int]])->int:

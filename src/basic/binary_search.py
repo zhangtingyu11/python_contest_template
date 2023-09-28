@@ -24,7 +24,7 @@ def find_bigger(nums: List[int], target: int)->int:
     如果结果为len(nums), 则表示没有大于target的数
 
     Args:
-        nums (List[int]): 已经从小到大排序好的数组
+        nums (List[int]): 已经从小到大排序好的数组              
         target (int): 需要大于的目标值
 
     Returns:
