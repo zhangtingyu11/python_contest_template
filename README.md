@@ -13,6 +13,7 @@
 [并查集](src/data_structure/dsu.py)
 [线段树](src/data_structure/segment_tree.py)
 [栈](src/data_structure/stack.py)
+[单调栈](src/data_structure//monotonic_stack.py)
 
 ## 动态规划
 [数位dp](src/dynamic_programming/digital_dp.py)
