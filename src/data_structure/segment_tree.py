@@ -227,7 +227,7 @@ class SegmentTreeRangeModifyAdd:
         self.build(o*2+1, mid+1, r)
         self.maintain(o)
         
-    #* 具体操作就是add[1, 1, n, idx, val, add], 前面三个参数是不变的
+    #* 具体操作就是add[1, 1, n, L, R, add], 前面三个参数是不变的
     def update(self, o: int, l: int, r: int, L: int, R: int, add: int)->None:
         """在[L, R]区间都加上add
         #! 需要注意的是idx的范围是[1, n]并不是从0开始
