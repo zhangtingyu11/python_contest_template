@@ -167,14 +167,14 @@ class SegmentTreeSingleModifyMax:
             int: 区间最大值
         """
         if L<=l and R>=r:
-            return self.sm[o]
+            return self.mx[o]
 
         mx = -inf
         mid = (l+r)//2
         if(L <= mid):
-            mx = max(mx, self.query_sum(o*2, l, mid, L, R))
+            mx = max(mx, self.query_max(o*2, l, mid, L, R))
         if(R > mid):
-            mx = max(mx, self.query_sum(o*2+1, mid+1, r, L, R))
+            mx = max(mx, self.query_max(o*2+1, mid+1, r, L, R))
         return mx
 
 class SegmentTreeRangeModifyAdd:
