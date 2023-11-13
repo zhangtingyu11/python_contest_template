@@ -3,6 +3,8 @@
 
 典型处理的问题是单点增加, 然后计算区间和
 可以参考这个图片https://static.cdn.menci.xyz/oi-wiki/ds/images/fenwick.svg?h=GMr8Aw
+总共会拆分出n个关键区间(n为数组的长度), 且关键区间的右端点各不相同
+树状数组其实求的是一个前缀问题, 因为前缀和可以转化为区间和, 所以树状数组可以处理区间和
 数组的下标从1开始
 查询操作:
     如果需要查询nums[1]~nums[11]的区间和, 11 = 1011
@@ -15,44 +17,55 @@
     110 + 10 = 1000
     每次都加上lowbit
 """
-class BIT:
-    def __init__(self, n: int):
+from typing import List
+class BIT_SUM:
+    def __init__(self, nums: List[int]):
         """初始化树状数组
 
         Args:
-            n (int): 如果原数组下标为0~n-1, 那么需要创建n+1长度的树状数组
+            nums (List[int]): 初始数组
         """
-        self.tree = [0] * n
+        n = len(nums)
+        tree = [0] * (n+1)
+        for i, num in enumerate(nums, 1):
+            tree[i] += num
+            nxt = i + (i & -i)
+            if nxt <= n:
+                tree[nxt]+=tree[i]
+        self.tree = tree
+        self.nums = nums
 
-    def inc(self, i: int, k: int) -> None:
-        """对下标为i的位置加上k
+    def inc(self, index: int, k: int) -> None:
+        """原数组下标为index的位置加上k
 
         Args:
-            i (int): 需要加的位置
+            index (int): 需要加的位置
             k (int): 要加上的数
         """
+        i = index+1
         while i < len(self.tree):
             self.tree[i] += k
             i += i & -i
+        self.nums[index]+=k
 
-    def sum(self, i: int) -> int:
-        """  返回闭区间 [1, i] 的元素和
+    def sum(self, index: int) -> int:
+        """  返回原数组[0, index]的元素和
 
         Args:
-            i (int): 区间的右端点
+            index (int): 区间的右端点
 
         Returns:
-            int: 闭区间 [1, i]的区间和
+            int: 闭区间[0, index]的区间和
         """
         res = 0
-        while i > 0:
-            res += self.tree[i]
-            i &= i - 1
+        while index > 0:
+            res += self.tree[index]
+            index -= index & -index
         return res
 
     def query(self, left: int, right: int) -> int:
         """
-        返回闭区间 [left, right] 的元素和
+        返回原数组闭区间[left, right]的元素和
 
         Args:
             left (int): 区间的左端点
@@ -61,4 +74,4 @@ class BIT:
         Returns:
             int: 区间和
         """
-        return self.sum(right) - self.sum(left - 1)
+        return self.sum(right+1) - self.sum(left)
