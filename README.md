@@ -36,6 +36,7 @@
 [最大公因数](src/mathematic/greatest_common_divisor.py)
 [判断质数](src/mathematic/judge_prime.py)
 [筛选质数](src/mathematic/filter_prime.py)
+[组合数求模](src/mathematic/combinatorics.py)
 
 ## 杂项
 [离散化](src/misc/discretization.py)
