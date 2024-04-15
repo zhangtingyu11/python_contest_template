@@ -15,6 +15,8 @@ class Dsu():
             size (int): 节点的个数
         """
         self.pa = list(range(size))
+        self.size = [1] * size #* 记录每个组的大小
+        self.setcount = size #* 记录组的个数
         
     
     def find(self, x: int)->int:
@@ -38,4 +40,13 @@ class Dsu():
             x (int): 需要合并的节点1
             y (int): 需要合并的节点2
         """
-        self.pa[self.find(x)] = self.find(y)
+        x, y = self.find(x), self.find(y)
+        if x == y:
+            return False
+        #* 要把小的合并到大的
+        if self.size[x] < self.size[y]:
+            x, y = y, x
+        self.pa[y] = x
+        self.size[x] += self.size[y]
+        self.setcount -= 1
+        return True
