@@ -17,7 +17,7 @@ class Test_Dsu():
         size = randint(1, 10000)
         dsu = Dsu(size)
         dsu.union(2, 3)
-        assert(dsu.find(2) == 3)
+        assert(dsu.find(2) == dsu.find(3))
         
 
         
