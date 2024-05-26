@@ -19,7 +19,7 @@ class SegmentTreeSingleModifyAdd:
             n (int): 初始数组的长度
             nums (List[int]): 初始的数组
         """
-        self.sm = [0] * (n*4)
+        self.sm = [0] * (2 << n.bit_length())
         self.nums = nums
         self.build(1, 1, n)
         
@@ -104,7 +104,7 @@ class SegmentTreeSingleModifyMax:
             n (int): 初始数组的长度
             nums (List[int]): 初始的数组
         """
-        self.mx = [-inf] * (n*4)
+        self.mx = [-inf] * (2 << n.bit_length())
         self.nums = nums
         self.build(1, 1, n)
         
@@ -195,7 +195,7 @@ class SegmentTreeRangeModifyAdd:
             n (int): 初始数组的长度
             nums (List[int]): 初始的数组
         """
-        self.sm = [0] * (n*4)
+        self.sm = [0] * (2 << n.bit_length())
         self.nums = nums
         self.build(1, 1, n)
         self.todo = [0] * (n*4) #! 存储区间更新是否停住了, 其他情况不一定是1(比如如果是区间乘, 就应该设置成1)
