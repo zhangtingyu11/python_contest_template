@@ -198,7 +198,7 @@ class SegmentTreeRangeModifyAdd:
         self.sm = [0] * (2 << n.bit_length())
         self.nums = nums
         self.build(1, 1, n)
-        self.todo = [0] * (n*4) #! 存储区间更新是否停住了, 其他情况不一定是1(比如如果是区间乘, 就应该设置成1)
+        self.todo = [0] * (2 << n.bit_length()) #! 存储区间更新是否停住了, 其他情况不一定是1(比如如果是区间乘, 就应该设置成1)
         
     def maintain(self, o: int)->None:
         """更新完左右子树后对当前节点进行维护
@@ -264,10 +264,10 @@ class SegmentTreeRangeModifyAdd:
         mid = (l+r)//2
         if l!=r and self.todo[o] != 0:  #* 如果不是叶子节点并且有懒标记 
             #* 传给左右儿子
-            self.todo[o*2] += self.todo[o]
-            self.todo[o*2+1] += self.todo[o]
             self.sm[o*2] += (mid-l+1) * self.todo[o]
             self.sm[o*2+1] += (r-mid) * self.todo[o]
+            self.todo[o*2] += self.todo[o]
+            self.todo[o*2+1] += self.todo[o]
             #* 自身清空
             self.todo[o] = 0
     
