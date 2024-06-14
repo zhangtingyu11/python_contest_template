@@ -57,3 +57,21 @@ def find_smaller(nums: List[int], target: int)->int:
         int: 返回索引值
     """
     return bisect_left(nums, target)-1
+
+
+def judge_in_range(nums: List[int], left, right)->bool:
+    """判断有序nums中有没有在[left, right]区间内的数
+
+    Args:
+        nums (List[int]): 有序的数组
+        left (_type_): 区间的左端点
+        right (_type_): 区间的右端点
+
+    Returns:
+        bool: 存在返回True, 否则返回False
+    """
+    bidx1 = bisect_left(nums, left)
+    bidx2 = bisect_right(nums, right)
+    if bidx1 == bidx2:
+        return False
+    return True
